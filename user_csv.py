@@ -1,13 +1,10 @@
 # user_csv.py
-# ENDG 233 F24
+# ENDG 233 F25
 # Nate Olson, Ruald James
 # Pairs L01 - 26
-# A terminal-based data analysis and visualization program in Python.
-# You must follow the specifications provided in the project description.
-# Remember to include docstrings and comments throughout your code.
+# Two functions for reading and writing csv files.
 
-### imports
-
+### functions
 def read_csv(filename: str, include_headers: bool = True) -> list[list]:
 	"""Reads a file given a file path.
 	Parameters:
@@ -85,13 +82,17 @@ def write_csv(filename: str, data: list[list], overwrite: bool) -> None:
 			data_string += ','
 		data_string += '\n'
 		csv_file.write(data_string)
+
+	csv_file.close()
 	return None
 
-# testing
-if __name__ == "__main__":
+### testing
+def main() -> None:
 	csv_data = read_csv("country_data.csv")
 	modified_data = []
 	for i in range(len(csv_data) - 145):
 		modified_data.append(csv_data[i])
-
 	write_csv("modified_country_data.csv", modified_data, True)
+
+if __name__ == "__main__":
+	main()
