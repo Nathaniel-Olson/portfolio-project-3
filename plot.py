@@ -17,7 +17,13 @@ def comparison_bar_plot(data: np.array, show: bool = True, save: bool = True, fi
         show (bool): Whether or not to show the graph on the screen
         save (bool): Whether or not to save the graph to the "final_plots" folder.
     """
-    header = data[0, 1:]
+    header = data[0, 1:].tolist()
+    colours = [(0.855, 0.749, 1), (0.565, 0.478, 0.839), (0.310, 0.318, 0.549), (0.173, 0.165, 0.290)]
+    types = []
+
+    for title in header:
+        types.append(title.split()[0])
+
     country_1_data = data[1, 1:].astype(float)
     country_2_data = data[2, 1:].astype(float)
 
@@ -26,11 +32,12 @@ def comparison_bar_plot(data: np.array, show: bool = True, save: bool = True, fi
 
     plt.figure()
     plt.subplot(1,2,1)
-    plt.bar(x = header, height = country_1_data)
+    plt.bar(x = types, height = country_1_data, color = colours)
     plt.title(country_1)
+    plt.ylabel("Species per Capita")
 
     plt.subplot(1,2,2)
-    plt.bar(x = header, height = country_2_data)
+    plt.bar(x = types, height = country_2_data, color = colours)
     plt.title(country_2)
 
     if save:

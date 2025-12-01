@@ -83,5 +83,6 @@ def write_csv(filename: str, data: list[list], overwrite: bool) -> None:
 		data_string += '\n'
 		csv_file.write(data_string)
 
+	# close the file
 	csv_file.close()
 	return None

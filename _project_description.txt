@@ -68,3 +68,41 @@ Stage 5: Data Plotting: --------------------------------------------------------
     Your plots will be graded manually. You should save a .png version of your figure and upload it into your working directory. Your code must output the same plot that was uploaded (you may choose to comment out the show function call as long as you clearly indicate where to comment it back in).
 
     Plotting notes: To view your matplotlib output, you will need to click on "Open Desktop" in the top, right-hand corner of the environment window. This will open a simulated desktop where you can view and save your plot directly in the working directory. If you see the following warning in the terminal, you may ignore it: QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-mysql'
+
+Stage 6: Rubric: --------------------------------------------------------------------
+    Data Handling: 30%
+        At least three separate csv datasets are imported, each with a minimum of three columns and 50 rows.
+        Data is read using the read_csv function, which is implemented as defined in the specifications.
+        No other modules are used to import the data. 
+        No data information is hard-coded/copy- pasted. 
+        A 2D list is created from the imported csv data.
+        Within the program execution, there is at least one use of the write_csv function, which is implemented as defined in the specifications.
+        A 2D list is used to both write or append data into a new csv file.
+
+    Code Implementation: 25%
+        Code structure contains and uses at least two user-defined functions that are defined in a separate module.
+        All user- defined functions use parameters and do not access global variables.
+        The data analysis includes the creation and use of a numpy array, and at least two calculations use numpy min, max, or mean methods.
+        The data analysis involves manipulation of the data (e.g. averaging, sum totals, etc.) and not just searching/printing available information.
+
+    User Interface and Execution: 25%
+        User is given clear guidance on how to enter at least two required input values.
+        If invalid input is provided, the user is prompted for re-entry without terminating the program.
+        All output is formatted neatly and presented clearly to the user.
+        Full execution includes at least one figure with two labelled subplots that correctly depict a chosen analysis of the data. 
+        No content that was not taught in class was used.
+
+    Commenting and Syntax: 10%
+        Group/individual number and name(s) are included within the project.
+        Comments are included throughout the code to explain the functionality.
+        All functions are fully documented using docstrings (including summary, parameters, and return values).
+        All user-defined functions and classes are declared outside of main.
+        Variables and functions have clear and useful names that use lowercase words separated by an underscore.
+        Code is clearly indented and spaces are included between variables and operators.
+
+    Video Demo: 10%
+        Video demo clearly explains how the solution meets the requirements including the read/write functionality.
+        Any advanced concepts not taught in the course are clearly explained.
+        The dataset analysis is explained and the plot result is shown.
+        Speakers are clear and audible.
+        If a pair, both team members participate in the video and duration is less than 5 minutes.

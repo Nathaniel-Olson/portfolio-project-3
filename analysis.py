@@ -195,7 +195,7 @@ def format_array_to_string(data: np.array) -> str:
         column_widths.append(max_col_width)
 
     # declare the string to hold the finished table
-    csv_string = '\n'
+    csv_string = 'Table:\n'
 
     # build the horizontal bar, with '+' in each corner, and a number of dashes corresponding to the column length
     horizontal_bar = '+'
