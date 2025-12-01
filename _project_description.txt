@@ -1,0 +1,70 @@
+Stage 1: Data Selection and Use: ----------------------------------------------------
+    A suggested dataset is included on D2L. You may use the provided data or select data of your own choosing.
+
+    You must use at least three separate csv files that be linked through a common identifier.
+
+    Each csv file must have at least three columns and at least 50 rows of data.
+    You may edit the datasets before you begin coding, but your program should not modify the csv files directly.
+
+    You may not hard-code any data values within the program - all information must be read in. This means that a TA could change a value or header name in your dataset and still get the desired results. You may assume that the order of the columns will not change, but you should avoid hard-coding any titles, etc.
+
+    You must create a 2D numpy array using your chosen dataset (see the next stage).
+    
+    You may not use global variables within your functions. All needed data should be passed into the program functions. You must import the data within your main function by calling your Stage 2 module.
+
+
+Stage 2: File Import and Exporting: -------------------------------------------------
+    Write a Python module called user_csv.py. The file should contain the following functions:
+
+        read_csv: This function takes 2 parameters:
+            filename: The name of the file to read data from
+
+            include_headers: This is an optional parameter. It indicates whether the headers should be returned with the data where the default value is assumed to be true.
+
+        This function should read the CSV file and return the contents in the form of a 2D list. You may not assume that the number of columns in each row is the same. If the data contains numerical values, the function should return them as floats, not strings. An example is provided below.
+
+        write_csv: This function takes 3 parameters:
+            filename: The name of the file you will write to.
+
+            data: A 2D list containing the data that you will write to a csv file.
+            
+            overwrite: A flag to indicate whether you are overwriting or appending to an existing file. 
+
+    You are not allowed to use the csv module or the numpy module to complete the import/export functionality.
+
+    You must use both the read and write functionality each at least once in your program execution.
+
+
+Stage 3: User Interface and Analysis: -----------------------------------------------
+    Your application must return useful information. Design an interface that allows users to search based on some sort of criteria or keywords.
+    
+    The user must provide at least two pieces of selection information (e.g. "region" and "average price") that is used to calculate/sort/filter, etc. and return the results.
+
+        For example, you could prompt the user to provide a country name, and then choose which statistics they would like to output (average number of threatened species, delta population change over time, etc.). Or search by region and then identify which country in the region has the min/max number of threatened plants, etc. This is your opportunity to get creative!
+
+    There is a minimum expectation that your user input will be used to manipulate the data, not just select and print original data.
+
+    Give the user clear input instructions. If an invalid entry is given, notify the user and allow them to re-enter the information. Your program should not end until the user chooses to do so.
+
+    All output information must be clearly defined and formatted using print statements. Consider formatting your data into a nice-looking table!
+
+
+Stage 4: Analysis Syntax: -----------------------------------------------------------
+    You may choose what data trends to calculate and present from your data. However, you must use the built-in numpy methods to calculate a min, max, or mean at least twice.
+
+    Your code must include and use at least two user-defined functions that have parameters passed in (not including the Stage 2 read/write functions) that must be included in a separate module (name of the module is up to you).
+
+
+Stage 5: Data Plotting: -------------------------------------------------------------
+    Use your data to create at least one figure containing two subplots using matplotlib. You may choose when to display this figure (e.g. when the user asks, at the end of the program, etc.).
+
+    All plots/subplots must be clearly readable and include at least the following elements:
+
+        Title
+        Axis labels
+        Legend (if applicable)
+        Different colours, lines, and/or plot types
+
+    Your plots will be graded manually. You should save a .png version of your figure and upload it into your working directory. Your code must output the same plot that was uploaded (you may choose to comment out the show function call as long as you clearly indicate where to comment it back in).
+
+    Plotting notes: To view your matplotlib output, you will need to click on "Open Desktop" in the top, right-hand corner of the environment window. This will open a simulated desktop where you can view and save your plot directly in the working directory. If you see the following warning in the terminal, you may ignore it: QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-mysql'
