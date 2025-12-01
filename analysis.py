@@ -170,7 +170,7 @@ def mean_population(country: str) -> float:
     mean_pop = data_row[1:].astype(float).mean()
     return mean_pop
 
-def format_list_to_string(data: list[list] | np.array) -> str:
+def format_array_to_string(data: np.array) -> str:
     """Formats a given 2d list or np.array into a stylized table for printing.
     Parameters:
         data: 2d list or np.array of information
@@ -178,12 +178,8 @@ def format_list_to_string(data: list[list] | np.array) -> str:
         str: formatted table of the data
     """
 
-    # cast the data as an np.array, if it isn't already
-    if not isinstance(data, np.array):
-        data_array = np.array(data)
-
     # get the shape of the array
-    array_shape = data_array.shape
+    array_shape = data.shape
 
     # create a list to track the width of each column
     column_widths = []
@@ -193,13 +189,13 @@ def format_list_to_string(data: list[list] | np.array) -> str:
     for col in range(array_shape[1]):
         max_col_width = 0
         for row in range(array_shape[0]):
-            value = data_array[row, col]
+            value = data[row, col]
             if len(value) > max_col_width:
                 max_col_width = len(value)
         column_widths.append(max_col_width)
 
     # declare the string to hold the finished table
-    csv_string = ''
+    csv_string = '\n'
 
     # build the horizontal bar, with '+' in each corner, and a number of dashes corresponding to the column length
     horizontal_bar = '+'
@@ -212,7 +208,7 @@ def format_list_to_string(data: list[list] | np.array) -> str:
     for row in range(array_shape[0]):
         csv_string += '| '
         for col in range(array_shape[1]):
-            csv_string += f"{data_array[row, col]:<{column_widths[col]}}"
+            csv_string += f"{data[row, col]:<{column_widths[col]}}"
             csv_string += ' | '
         csv_string.rstrip(' ')
         csv_string += "\n"
@@ -220,28 +216,7 @@ def format_list_to_string(data: list[list] | np.array) -> str:
         # for the header row only, add an extra horizontal bar to distinguish it
         if row == 0:
             csv_string += horizontal_bar + '\n'
-    csv_string += horizontal_bar
+    csv_string += horizontal_bar + '\n'
 
     # return the string
     return csv_string
-
-### testing
-from random import choice
-
-def get_random_country() -> str:
-    country_list = np.array(read_csv("country_data.csv", False))
-    country_list = country_list[:, 0].flatten()
-    country = choice(country_list)
-    return country
-      
-if __name__ == "__main__":
-    country1 = get_random_country()
-    country2 = get_random_country()
-    mean_pop = mean_population(country1)
-    max_pop = maximum_population(country1)
-    
-    print(f"{country1=}")
-    print(f"{country2=}")
-    print(f"{mean_pop=:.2f}\n{max_pop=:.0f}")
-
-    print(format_list_to_string(compare_endangered_species(country1, country2)))

@@ -11,7 +11,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from user_csv import read_csv, write_csv
-from analysis import *
+
+from analysis import compare_population_densities, \
+					 compare_endangered_species, \
+					 population_density_per_year, \
+					 endangered_species_per_capita, \
+					 maximum_population, \
+					 mean_population, \
+					 format_array_to_string
+
+from plot import comparison_bar_plot
 
 
 ### functions
@@ -19,20 +28,23 @@ def menu_options1()	->	str:
 	while True:
 		print("Please select one of the folowing options:")
 		print("Menu Options:")
-		print("1. Compare 2 Countries")
-		print("2. Single Country Analysis")
-		print("3. Exit Program")
+		print("\t1. Compare 2 Countries")
+		print("\t2. Single Country Analysis")
+		print("\t3. Exit Program")
 		user_choice = input("Please select an option (1-3): ")
+		print()
 		if user_choice in ['1', '2', '3']:
 			return user_choice
 		else:
 			print("Invalid input. Please try again.")
+			print()
 
 def compare_countries_region_menu() -> list:
 	while True:
 		print("Please select 2 countries")
-		user_country1 = input("Please select the 1st country: ")
-		user_country2 = input("Please select the 2nd country: ")
+		user_country1 = input("Please select the 1st country: ").capitalize()
+		user_country2 = input("Please select the 2nd country: ").capitalize()
+		print()
 		
 		country_data = np.array(read_csv("country_data.csv", False))
 		flag = 0
@@ -47,57 +59,71 @@ def compare_countries_region_menu() -> list:
 			return [user_country1, user_country2]
 		else:
 			print("Invalid input. Please provide 2 valid inputs")
+			print()
 
 def compare_countries_inner_menu() -> str:
 
 	while True:
 		print("Country Comparison Options:")
-		print("1. Compare Population Densities")
-		print("2. Compare Endangered Species")
-		print("3. Return to Main Menu")
+		print("\t1. Compare Population Densities")
+		print("\t2. Compare Endangered Species")
+		print("\t3. Return to Main Menu")
 		user_choice = input("Please select an option (1-3): ")
+		print()
 		if user_choice in ['1', '2', '3']:
 			return user_choice
 		else:
 			print("Invalid input. Please try again.")
+			print()
 
 def print_densities_comparison(user_countries: list) -> None:
 	country1 = user_countries[0]
 	country2 = user_countries[1]
 
 	output = compare_population_densities(country1, country2)
-	print(format_list_to_string(output))
+	print(format_array_to_string(output))
 
-def print_endangered_species(user_countries: list) -> None:
+def print_endangered_species(user_countries: list) -> np.array:
 	country1 = user_countries[0]
 	country2 = user_countries[1]
 
 	output = compare_endangered_species(country1, country2)
-	print(format_list_to_string(output))
+	print(format_array_to_string(output))
+	return output
+
+def want_graph(data: np.array) -> None:
+	graph_show = input("Do you want to show graph(T/F)? (*Note: the program will stop until window is closed*) ")
+	graph_save = input("Do you want to save graph(T/F)? ")
+	print()
+	graph_show = (True if graph_show == "T" else False)
+	graph_save = (True if graph_save == "T" else False)
+	comparison_bar_plot(data, graph_show, graph_save)
 
 def single_country_region() -> str:
-	pass
 	while True:
-		user_country = input("Please select a country: ")
+		user_country = input("Please select a country: ").capitalize()
 
 		country_data = np.array(read_csv("country_data.csv", False))
 		for i in country_data:
 			if user_country == i[0]:
 				return user_country
-			else:
-				print("Invalid input. Please input a valid country")
+		else:
+			print("Invalid input. Please input a valid country")
+			print()
 
 def single_country_inner_menu() -> str:
 	while True:
 		print("Single Country Data Options:")
-		print("1. Maximum Population")
-		print("2. Mean Population")
-		print("3. Return to Main Menu")
+		print("\t1. Maximum Population")
+		print("\t2. Mean Population")
+		print("\t3. Return to Main Menu")
 		user_choice = input("Please select an option (1-3): ")
+		print()
 		if user_choice in ['1', '2', '3']:
 			return user_choice
 		else:
 			print("Invalid input. Please try again.")
+			print()
 
 def print_max_pop(country) -> None:
 	max_pop = maximum_population(country)
@@ -105,11 +131,7 @@ def print_max_pop(country) -> None:
 
 def print_mean_pop(country) -> None:
 	mean_pop = mean_population(country)
-	print(f"The maximum population of {country} is {mean_pop:.0f}.")
-
-		
-
-
+	print(f"The mean population of {country} is {mean_pop:.0f}.")
 
 ### testing
 def main() -> None:
@@ -119,25 +141,34 @@ def main() -> None:
 		outer_user_choice = menu_options1()
 		if outer_user_choice == "1":
 			while True:
-				country_list = compare_countries_region_menu()
 				inner_user_choice = compare_countries_inner_menu()
-				if inner_user_choice == "1":
-					print_densities_comparison()
-				elif inner_user_choice == "2":
-					print_endangered_species()
-				else:
+				if inner_user_choice == "3":
 					break
+				else:
+
+					country_list = compare_countries_region_menu()
+
+					if inner_user_choice == "1":
+						print_densities_comparison(country_list)
+					elif inner_user_choice == "2":
+						data = print_endangered_species(country_list)
+						want_graph(data)
+
 
 		elif outer_user_choice == "2":
 			while True:
-				user_country = single_country_region()
-				inner_user_choice = single_country_region()
-				if inner_user_choice == "1":
-					print_max_pop()
-				elif inner_user_choice == "2":
-					print_mean_pop()
-				else:
+				inner_user_choice = single_country_inner_menu()
+				if inner_user_choice == "3":
 					break
+				else:
+
+					user_country = single_country_region()
+
+					if inner_user_choice == "1":
+						print_max_pop(user_country)
+					elif inner_user_choice == "2":
+						print_mean_pop(user_country)
+				
 		else:
 			break
 

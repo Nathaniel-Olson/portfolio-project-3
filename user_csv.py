@@ -85,14 +85,3 @@ def write_csv(filename: str, data: list[list], overwrite: bool) -> None:
 
 	csv_file.close()
 	return None
-
-### testing
-def main() -> None:
-	csv_data = read_csv("country_data.csv")
-	modified_data = []
-	for i in range(len(csv_data) - 145):
-		modified_data.append(csv_data[i])
-	write_csv("modified_country_data.csv", modified_data, True)
-
-if __name__ == "__main__":
-	main()
