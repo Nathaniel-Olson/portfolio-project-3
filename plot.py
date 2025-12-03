@@ -34,11 +34,18 @@ def comparison_bar_plot(data: np.array, show: bool = True, save: bool = True, fi
     plt.subplot(1,2,1)
     plt.bar(x = types, height = country_1_data, color = colours)
     plt.title(country_1)
-    plt.ylabel("Species per Capita")
+    plt.ylabel("Amount per Capita")
+    plt.xlabel("Species")
+    plt.xticks(ticks = [0,1,2,3], labels = types, rotation = 30)
 
     plt.subplot(1,2,2)
     plt.bar(x = types, height = country_2_data, color = colours)
     plt.title(country_2)
+    plt.xlabel("Species")
+    plt.ylabel("Amount per Capita")
+    plt.xticks(ticks = [0,1,2,3], labels = types, rotation = 30)
+
+    plt.subplots_adjust(wspace = 0.6, bottom = 0.16)
 
     if save:
         plt.savefig(f"final_plots/{filename}")

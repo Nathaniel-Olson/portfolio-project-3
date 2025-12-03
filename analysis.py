@@ -19,7 +19,7 @@ def compare_population_densities(country1: str, country2: str) -> np.array:
     """
     # get the population density array for each country
     country1_pop_densities = population_density_per_year(country1)
-    country2_pop_densities = population_density_per_year(country2)\
+    country2_pop_densities = population_density_per_year(country2)
     
     # keep the header row and add the data for each country underneath it
     total_pop_densities = np.vstack((country1_pop_densities, country2_pop_densities[1]))
@@ -86,7 +86,7 @@ def population_density_per_year(country: str) -> np.array:
 
     return data_table
 
-def endangered_species_per_capita(country: str) -> list[list]:
+def endangered_species_per_capita(country: str) -> np.array:
     """Returns a numpy array of the number of endangered species per capita of a given country.
     Parameters:
         country: The name of the country to analyze
@@ -95,10 +95,10 @@ def endangered_species_per_capita(country: str) -> list[list]:
     """
 
     # read both the population data and endangered species data as np.arrays
-    population_data = np.array(read_csv("population_data.csv", True))
     species_data = np.array(read_csv("threatened_species.csv", True))
     
     # iterating over the species data, if the first element (Country) is the same as the input country, then save the index
+    print(country)
     for index, row in enumerate(species_data):
         if row[0] == country:
             country_index = index

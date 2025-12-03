@@ -57,8 +57,8 @@ def compare_countries_region_menu() -> list:
 		
 		# Asks user and grabs the 2 countries they want to compare
 		print("Please select 2 countries")
-		user_country1 = input("Please select the 1st country: ").capitalize()
-		user_country2 = input("Please select the 2nd country: ").capitalize()
+		user_country1 = input("Please select the 1st country: ").title()
+		user_country2 = input("Please select the 2nd country: ").title()
 		print()
 		
 		country_data = np.array(read_csv("country_data.csv", False)) # reads country data and saves it as a np array
@@ -149,8 +149,8 @@ def want_graph(data: np.array) -> None:
 
 
 	if graph_save: # If user wants to save the graph
-		name = input("Please input the filename to save as (dont include .png): ") # Asks user for filename
-		comparison_bar_plot(data, graph_show, graph_save, filename = f"{name}.png") # Calls the plotting function with filename
+		name = "user_graph.png" # Asks user for filename
+		comparison_bar_plot(data, graph_show, graph_save, name) # Calls the plotting function with filename
 	else:
 		comparison_bar_plot(data, graph_show, graph_save) # Calls the plotting function without filename
 	
@@ -167,14 +167,8 @@ def want_save(data: np.array) -> None:
 	want_save = (True if want_save == "T" else False) # Converts user input to boolean value
 
 	if want_save: # If user doeas want to save the data
-		while True: # loop until valid filename
-			name = input("Please input the filename to save as (dont include .csv): ") # Asks user for filename
-			if name == "country_data" or name == "population_data" or name == "threatened_species": # Checks if filename is one of the data set file names
-				print("Filename in use. Please Try Again.") # If it is, print error message
-				print()
-			else:
-				break # If filename is valid, break loop
-		write_csv(f"{name}.csv", data.tolist(), False) # Writes the data to a csv file with the given filename
+		name = "user_built_csv.csv"
+		write_csv(name, data.tolist(), False) # Writes the data to a csv file with the given filename
 	return None
 
 def single_country_region() -> str:
@@ -185,7 +179,7 @@ def single_country_region() -> str:
 		str: The country the user selected
 	'''
 	while True: # loop until valid input
-		user_country = input("Please select a country: ").capitalize() # Asks user for country, and capitalizes the first letter
+		user_country = input("Please select a country: ").title() # Asks user for country, and capitalizes the first letter
 
 		country_data = np.array(read_csv("country_data.csv", False)) # reads country data and saves it as a np array
 		for i in country_data: # loops through country data to check if country is valid
@@ -241,6 +235,7 @@ def main() -> None:
 	"""Runs the main terminal loop."""
 
 	print("Welcome to our app") # Print welcome message
+	print()
 
 	while True: # Main loop, loop until user wants to exit
 		# Grabs user menu choice from main menu
