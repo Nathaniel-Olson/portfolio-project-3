@@ -40,10 +40,11 @@ def read_csv(filename: str, include_headers: bool = True) -> list[list]:
 
 				# if there is a minus sign
 				if value[0] == '-':
+					# if the next value is a numerical digit (0-9)
 					if value[1:].isdigit():
 						data_row[index] = float(value)
 
-				# if it is a numerical digit
+				# if it is a numerical digit (0-9)
 				if value.isdigit():
 					data_row[index] = float(value)
 
